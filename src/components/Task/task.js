@@ -8,9 +8,9 @@ export default {
   computed: {
     createdAt() {
       return this.data.created_at.slice(0, 10)
+    },
+    dueDate() {
+      return this.data.date?.slice(0, 10) || 'none'
     }
-    // dueDate() {
-    //   return this.data.updated_at.slice(0, 10)
-    // }
   }
 }

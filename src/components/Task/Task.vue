@@ -11,7 +11,7 @@
 
     <v-card-text> <span class="titleOfCard">Created At:</span> {{ createdAt }} </v-card-text>
 
-    <v-card-text> <span class="titleOfCard">Due Date:</span> {{ data.date }} </v-card-text>
+    <v-card-text> <span class="titleOfCard">Due Date:</span> {{ dueDate }} </v-card-text>
 
     <v-card-actions>
       <v-btn color="success" variant="elevated">
