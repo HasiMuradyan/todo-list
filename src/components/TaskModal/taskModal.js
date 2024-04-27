@@ -9,10 +9,6 @@ export default {
     isOpen: {
       type: Boolean,
       required: true
-    },
-    isEmpty: {
-      type: Boolean,
-      required: true
     }
   },
   data() {

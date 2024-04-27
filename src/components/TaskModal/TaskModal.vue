@@ -5,12 +5,7 @@
         <v-card-text>
           <v-row dense>
             <v-col cols="12" sm="12">
-              <v-text-field
-                label="Title*"
-                required
-                :class="{ redBox: isEmpty }"
-                v-model="title"
-              ></v-text-field>
+              <v-text-field label="Title*" required v-model="title"></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="12">
@@ -40,9 +35,3 @@
 </template>
 
 <script src="./taskModal.js"></script>
-
-<style scoped>
-.redBox {
-  border: 2px solid red;
-}
-</style>

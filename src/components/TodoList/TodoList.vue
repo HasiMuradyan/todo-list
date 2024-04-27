@@ -5,7 +5,6 @@
       :isOpen="isTaskModalOpen"
       @close="toggleTaskModal"
       @taskSave="onTaskSave"
-      :isEmpty="isTitleEmpty"
     />
     <v-row align="center" justify="center">
       <v-col cols="auto">
