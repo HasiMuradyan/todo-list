@@ -1,6 +1,6 @@
 <template>
   <div class="pa-4 text-center">
-    <v-dialog v-model="isOpen" max-width="600">
+    <v-dialog :modelValue="isOpen" @update:modelValue="onClose" max-width="600">
       <v-card prepend-icon="mdi-account" title="Add new task">
         <v-card-text>
           <v-row dense>

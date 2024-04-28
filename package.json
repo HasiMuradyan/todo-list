@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "@vuepic/vue-datepicker": "^8.4.0",
     "vue": "^3.4.21",
     "vuetify": "^3.5.16"

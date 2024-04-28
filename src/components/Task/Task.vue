@@ -1,7 +1,7 @@
 <template>
-  <v-card class="mx-auto my-8" elevation="16" max-width="344">
-    <v-checkbox></v-checkbox>
+  <v-card class="mx-auto mb-2 ps-5" elevation="16" max-width="350" color="grey-lighten-4">
     <v-card-item>
+      <v-checkbox></v-checkbox>
       <v-card-title> {{ data.title }}</v-card-title>
     </v-card-item>
 
@@ -32,6 +32,6 @@
 <style>
 .titleOfCard {
   font-size: medium;
-  color: blue;
+  color: rgb(69, 4, 4);
 }
 </style>

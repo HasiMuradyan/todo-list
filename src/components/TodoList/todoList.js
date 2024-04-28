@@ -1,5 +1,8 @@
 import TaskModal from '../TaskModal/TaskModal.vue'
 import Task from '../Task/Task.vue'
+import TaskApi from '../../utils/taskApi.js'
+
+const taskApi = new TaskApi()
 
 export default {
   components: {
@@ -12,31 +15,27 @@ export default {
       tasks: []
     }
   },
+  created() {
+    this.getTasks()
+  },
   methods: {
     toggleTaskModal() {
       this.isTaskModalOpen = !this.isTaskModalOpen
     },
+    getTasks() {
+      taskApi
+        .getTasks()
+        .then((tasks) => {
+          this.tasks = tasks
+        })
+        .catch((err) => {
+          console.log('err', err)
+        })
+    },
 
     onTaskSave(task) {
-      const url = 'http://localhost:3001/task'
-      const params = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(task)
-      }
-      fetch(url, params)
-        .then(async (res) => {
-          if (res.status >= 500) {
-            throw new Error('Something went wrong, please, try again later!')
-          }
-          const result = await res.json()
-          if (res.status >= 300 && result.error) {
-            throw new Error(result.error.message)
-          }
-          return result
-        })
+      taskApi
+        .addNewTask(task)
         .then((newTask) => {
           this.tasks.push(newTask)
           this.toggleTaskModal()
@@ -44,7 +43,6 @@ export default {
         .catch((err) => {
           console.log('err', err)
         })
-      // send the task to backend
     }
   }
 }
