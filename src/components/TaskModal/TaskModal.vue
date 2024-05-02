@@ -6,6 +6,7 @@
           <v-row dense>
             <v-col cols="12" sm="12">
               <v-text-field
+                ref="title"
                 required
                 :class="{ invalid: !isTitleValid }"
                 v-model="title"

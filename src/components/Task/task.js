@@ -15,7 +15,10 @@ export default {
   },
   methods: {
     onEdit() {
-      this.$emit('taskEdit', this.data)
+      this.$emit('taskEdit')
+    },
+    onDelete() {
+      this.$emit('taskDelete')
     }
   }
 }
