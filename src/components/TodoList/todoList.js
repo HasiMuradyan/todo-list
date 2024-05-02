@@ -21,28 +21,3 @@ export default {
   methods: {
     toggleTaskModal() {
       this.isTaskModalOpen = !this.isTaskModalOpen
-    },
-    getTasks() {
-      taskApi
-        .getTasks()
-        .then((tasks) => {
-          this.tasks = tasks
-        })
-        .catch((err) => {
-          console.log('err', err)
-        })
-    },
-
-    onTaskSave(task) {
-      taskApi
-        .addNewTask(task)
-        .then((newTask) => {
-          this.tasks.push(newTask)
-          this.toggleTaskModal()
-        })
-        .catch((err) => {
-          console.log('err', err)
-        })
-    }
-  }
-}

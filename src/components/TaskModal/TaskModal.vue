@@ -5,11 +5,7 @@
         <v-card-text>
           <v-row dense>
             <v-col cols="12" sm="12">
-              <v-text-field
-                required
-                :class="{ invalid: !isTitleValid }"
-                v-model="title"
-              ></v-text-field>
+
             </v-col>
 
             <v-col cols="12" sm="12">
@@ -45,9 +41,3 @@
 </template>
 
 <script src="./taskModal.js"></script>
-
-<style>
-.invalid .v-input__control {
-  border: 1px solid red;
-}
-</style>
