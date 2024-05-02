@@ -36,7 +36,17 @@ class TaskApi {
     return this.request(url, params)
   }
   getSingleTask() {}
-  deleteTask() {}
+  updateTask(task) {
+    const url = `${this.apiHost}/task/${task._id}`
+    const params = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    }
+    return this.request(url, params)
+  }
 }
 
 export default TaskApi
