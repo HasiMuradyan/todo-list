@@ -21,10 +21,14 @@ export default {
   },
   created() {
     if (this.editingTask) {
-      this.title = this.editingTask.title
-      this.description = this.editingTask.description
-      this.dueDate = new Date(this.editingTask.date)
+      const { title, description, date } = this.editingTask
+      this.title = title
+      this.description = description
+      this.dueDate = date ? new Date(date) : ''
     }
+  },
+  mounted() {
+    this.$refs.title.focus()
   },
   methods: {
     onClose() {
@@ -37,6 +41,8 @@ export default {
       }
       if (this.dueDate) {
         task.date = this.dueDate.toISOString().slice(0, 10)
+      } else {
+        task.date = ''
       }
 
       if (this.editingTask) {
@@ -48,9 +54,6 @@ export default {
       }
 
       this.$emit('taskAdd', task)
-    },
-    onTitleInput(event) {
-      this.title = event.target.value
     }
   },
   computed: {

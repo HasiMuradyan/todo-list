@@ -46,6 +46,21 @@ export default {
         this.$toast.success('The task has been created successfully!').catch(this.handleError)
       })
     },
+    onTaskStatusChange(editedTask) {
+      taskApi
+        .updateTask(editedTask)
+        .then((updatedTask) => {
+          this.findAndReplaceTask(updatedTask)
+          let message
+          if (updatedTask.status === 'done') {
+            message = 'Congratulations, the task is done!'
+          } else {
+            message = 'You have successfully restored the task!'
+          }
+          this.$toast.success(message)
+        })
+        .catch(this.handleError)
+    },
     onTaskSave(editedTask) {
       taskApi
         .updateTask(editedTask)
@@ -62,6 +77,15 @@ export default {
     },
     onTaskEdit(editingTask) {
       this.editingTask = editingTask
+    },
+    onTaskDelete(taskId) {
+      taskApi
+        .deleteTask(taskId)
+        .then(() => {
+          this.tasks = this.tasks.filter((t) => t._id !== taskId)
+          this.$toast.success('The task have been deleted successfully!')
+        })
+        .catch(this.handleError)
     },
     handleError(error) {
       this.$toast.error(error.message)
