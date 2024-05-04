@@ -1,9 +1,7 @@
 import TaskModal from '../TaskModal/TaskModal.vue'
 import Task from '../Task/Task.vue'
 import TaskApi from '../../utils/taskApi.js'
-
 const taskApi = new TaskApi()
-
 export default {
   components: {
     TaskModal,
@@ -34,10 +32,7 @@ export default {
   methods: {
     toggleTaskModal() {
       this.isTaskModalOpen = !this.isTaskModalOpen
-    },
-    getTasks() {
-      taskApi
-        .getTasks()
+	@@ -28,21 +41,35 @@ export default {
         .then((tasks) => {
           this.tasks = tasks
         })
