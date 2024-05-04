@@ -1,23 +1,23 @@
 <template>
-  <v-card class="mx-auto mb-2 ps-5" elevation="16" max-width="350" color="grey-lighten-4">
-    <v-card-item>
-      <v-checkbox></v-checkbox>
+  <v-card class="mx-auto my-8 w-100" elevation="10" max-width="350" color="grey-lighten-4">
+    <v-card-item class="pa-2 pl-4">
+      <v-checkbox class="mb-n6 mx-n1"></v-checkbox>
       <v-card-title> {{ data.title }}</v-card-title>
     </v-card-item>
 
     <v-card-text>{{ data.description }} </v-card-text>
 
-    <v-card-text> <span class="titleOfCard">Status:</span>{{ data.status }} </v-card-text>
+    <v-card-text>Status:{{ data.status }} </v-card-text>
 
-    <v-card-text> <span class="titleOfCard">Created At:</span> {{ createdAt }} </v-card-text>
+    <v-card-text>Created At: {{ createdAt }} </v-card-text>
 
-    <v-card-text> <span class="titleOfCard">Due Date:</span> {{ dueDate }} </v-card-text>
+    <v-card-text>Due Date:{{ dueDate }} </v-card-text>
 
     <v-card-actions>
       <v-btn color="success" variant="elevated">
         <v-icon icon="mdi-check-outline" />
       </v-btn>
-      <v-btn color="warning" variant="elevated">
+      <v-btn color="warning" variant="elevated" @click="onEdit">
         <v-icon icon="mdi-archive-edit-outline" />
       </v-btn>
       <v-btn color="error" variant="elevated">
@@ -28,10 +28,3 @@
 </template>
 
 <script src="./task.js"></script>
-
-<style>
-.titleOfCard {
-  font-size: medium;
-  color: rgb(69, 4, 4);
-}
-</style>
