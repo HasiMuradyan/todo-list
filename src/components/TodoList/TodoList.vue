@@ -12,6 +12,14 @@
       </v-col>
     </v-row>
   </v-container>
+
+  <v-container>
+    <v-row>
+      <v-col v-for="taskData in tasks" :key="taskData._id" cols="12" md="6" lg="4" xl="3">
+        <task :data="taskData" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script src="./todoList.js"></script>
