@@ -22,6 +22,7 @@
           :data="taskData"
           @taskEdit="onTaskEdit(taskData)"
           @taskDelete="onTaskDelete(taskData._id)"
+          @taskStatus="onTaskStatusChange(taskData)"
         />
       </v-col>
     </v-row>

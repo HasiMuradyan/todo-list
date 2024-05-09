@@ -1,6 +1,7 @@
-import TaskModal from '../TaskModal/TaskModal.vue'
-import Task from '../Task/Task.vue'
-import TaskApi from '../../utils/taskApi.js'
+import { mapMutations } from 'vuex'
+import TaskModal from '../../TaskModal/TaskModal.vue'
+import Task from '../../Task/Task.vue'
+import TaskApi from '../../../utils/taskApi.js'
 
 const taskApi = new TaskApi()
 
@@ -32,26 +33,40 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['toggleLoading']),
     toggleTaskModal() {
       this.isTaskModalOpen = !this.isTaskModalOpen
     },
     getTasks() {
+      this.toggleLoading()
       taskApi
         .getTasks()
         .then((tasks) => {
           this.tasks = tasks
         })
         .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
     },
 
     onTaskAdd(task) {
+      this.toggleLoading()
+
       taskApi.addNewTask(task).then((newTask) => {
         this.tasks.push(newTask)
         this.toggleTaskModal()
-        this.$toast.success('The task has been created successfully!').catch(this.handleError)
+        this.$toast
+          .success('The task has been created successfully!')
+          .catch(this.handleError)
+          .finally(() => {
+            this.toggleLoading()
+          })
       })
     },
     onTaskStatusChange(editedTask) {
+      editedTask.status = editedTask.status === 'active' ? 'done' : 'active'
+      this.toggleLoading()
       taskApi
         .updateTask(editedTask)
         .then((updatedTask) => {
@@ -65,6 +80,9 @@ export default {
           this.$toast.success(message)
         })
         .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
     },
     onTaskSave(editedTask) {
       taskApi
@@ -75,6 +93,9 @@ export default {
           this.$toast.success('The task have been updated successfully!')
         })
         .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
     },
     findAndReplaceTask(updatedTask) {
       const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
@@ -84,6 +105,7 @@ export default {
       this.editingTask = editingTask
     },
     onTaskDelete(taskId) {
+      this.toggleLoading()
       taskApi
         .deleteTask(taskId)
         .then(() => {
@@ -91,6 +113,9 @@ export default {
           this.$toast.success('The task have been deleted successfully!')
         })
         .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
     },
     handleError(error) {
       this.$toast.error(error.message)

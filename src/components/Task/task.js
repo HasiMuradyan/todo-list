@@ -11,6 +11,9 @@ export default {
     },
     dueDate() {
       return this.data.date?.slice(0, 10) || 'none'
+    },
+    active() {
+      return this.data.status === 'active'
     }
   },
   methods: {
@@ -19,6 +22,9 @@ export default {
     },
     onDelete() {
       this.$emit('taskDelete')
+    },
+    statusChange() {
+      this.$emit('taskStatus')
     }
   }
 }
