@@ -1,9 +1,9 @@
 <template>
   <v-layout>
-    <v-footer class="bg-indigo-lighten-1 text-center d-flex flex-column">
+    <v-footer class="bg-blue-grey-lighten-5 text-center d-flex flex-column">
       <div>
         <v-btn
-          class="py-1"
+          class="py-1 grey-darken-4"
           v-for="socialIcon in socialIcons"
           :key="socialIcon"
           variant="text"
@@ -16,7 +16,7 @@
       </div>
       <v-row justify="center" no-gutters>
         <v-btn
-          class="py-1"
+          class="py-1 grey-darken-4"
           v-for="nav in navBar"
           :key="nav.title"
           variant="text"
@@ -32,9 +32,15 @@
 
       <v-divider></v-divider>
 
-      <div>{{ new Date().getFullYear() }} — <strong>ToDo List</strong></div>
+      <div>{{ getYear }} — <strong>ToDo List</strong></div>
     </v-footer>
   </v-layout>
 </template>
 
 <script src="./footer.js"></script>
+
+<style>
+.footerContainerPart {
+  background-color: #d4bbbb00;
+}
+</style>

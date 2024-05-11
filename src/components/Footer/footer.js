@@ -13,5 +13,10 @@ export default {
         { icon: 'mdi-twitter', path: 'https://www.twitter.com' }
       ]
     }
+  },
+  computed: {
+    getYear() {
+      return new Date().getFullYear()
+    }
   }
 }

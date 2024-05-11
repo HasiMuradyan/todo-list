@@ -6,7 +6,7 @@
       <v-toolbar-items class="hidden-xs-only">
         <v-btn text-decoration-none><router-link to="/">Home</router-link></v-btn>
         <v-btn text-decoration-none><router-link to="/about">About</router-link></v-btn>
-        <v-btn text-decoration-none><router-link to="/contact">Contact</router-link></v-btn>
+        <v-btn text-decoration-none><router-link to="/contact-us">Contact</router-link></v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </v-container>

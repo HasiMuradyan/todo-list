@@ -23,12 +23,15 @@
 
     <v-card-actions>
       <v-btn
-        :color="data.status === 'active' ? 'success' : 'info'"
+        v-if="data.status === 'active'"
+        color="success"
         variant="elevated"
-        @click="statusChange"
+        @click="onStatusChange('done')"
       >
-        <v-icon v-if="data.status === 'active'" icon="mdi-check-outline" />
-        <v-icon v-else icon="mdi-reload" />
+        <v-icon icon="mdi-check-outline" />
+      </v-btn>
+      <v-btn v-else color="info" variant="elevated" @click="onStatusChange('active')">
+        <v-icon icon="mdi-reload" />
       </v-btn>
 
       <v-btn color="warning" variant="elevated" @click="onEdit">

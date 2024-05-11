@@ -23,8 +23,12 @@ export default {
     onDelete() {
       this.$emit('taskDelete')
     },
-    statusChange() {
-      this.$emit('taskStatus')
+    onStatusChange(status) {
+      const updatedTask = {
+        ...this.data,
+        status
+      }
+      this.$emit('statusChange', updatedTask)
     }
   }
 }
