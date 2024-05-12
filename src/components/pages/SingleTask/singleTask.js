@@ -1,14 +1,11 @@
 import { mapMutations } from 'vuex'
 import TaskModal from '../../TaskModal/TaskModal.vue'
 import TaskApi from '../../../utils/taskApi.js'
-import NotFound from '../NotFound/NotFound.vue'
-
 const taskApi = new TaskApi()
 
 export default {
   components: {
-    TaskModal,
-    NotFound
+    TaskModal
   },
   data() {
     return {
@@ -27,7 +24,7 @@ export default {
       return this.task.date?.slice(0, 10) || 'none'
     },
     active() {
-      return this.data.status === 'active'
+      return this.task.status === 'active'
     }
   },
 
@@ -51,6 +48,7 @@ export default {
     },
 
     onSave(updatedTask) {
+      this.toggleLoading()
       taskApi
         .updateTask(updatedTask)
         .then(() => {
@@ -64,15 +62,21 @@ export default {
         })
     },
     statusChange() {
-      this.task.status === 'active' ? (this.task.status = 'done') : (this.task.status = 'active')
       this.toggleLoading()
+      const updatedTask = {
+        ...this.task,
+        status: this.active ? 'done' : 'active'
+      }
       taskApi
-        .updateTask(this.task)
-        .then((updatedTask) => {
-          const message =
-            updatedTask.status === 'done'
-              ? 'Congratulations, the task is done!'
-              : 'You have successfully restored the task!'
+        .updateTask(updatedTask)
+        .then(() => {
+          this.task = updatedTask
+          let message
+          if (this.task.status === 'done') {
+            message = 'The task is Done successfully!'
+          } else {
+            message = 'The task is restored successfully!'
+          }
           this.$toast.success(message)
         })
         .catch(this.handleError)

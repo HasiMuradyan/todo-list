@@ -63,57 +63,67 @@ export default {
           this.toggleLoading()
         })
     },
-    findAndReplaceTask(updatedTask) {
-      const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
-      this.tasks[index] = updatedTask
-    },
-    onTaskUpdate(editedTask) {
-      return taskApi.updateTask(editedTask).then((updatedTask) => {
-        this.findAndReplaceTask(updatedTask)
-      })
-    },
 
-    onStatusChange(updatedTask) {
-      this.onTaskUpdate(updatedTask)
-        .then(() => {
+    onTaskStatusChange(task) {
+      this.toggleLoading()
+      const updatedTask = {
+        ...task,
+        status: task.status === 'active' ? 'done' : 'active'
+      }
+      taskApi
+        .updateTask(updatedTask)
+        .then((updatedTask) => {
+          this.findAndReplaceTask(updatedTask)
           let message
           if (updatedTask.status === 'done') {
-            message = 'The task have been completed successfully!'
+            message = 'The task is Done successfully!'
           } else {
-            message = 'You have successfully restored the task!'
+            message = 'The task is restored successfully!'
           }
           this.$toast.success(message)
         })
         .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
+    },
+    onTaskSave(editedTask) {
+      this.toggleLoading()
+      taskApi
+        .updateTask(editedTask)
+        .then((updatedTask) => {
+          this.findAndReplaceTask(updatedTask)
+          this.isTaskModalOpen = false
+          this.$toast.success('The task has been updated successfully!')
+        })
+        .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
+    },
+    findAndReplaceTask(updatedTask) {
+      const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
+      this.tasks[index] = updatedTask
+    },
+    onTaskEdit(editingTask) {
+      this.editingTask = editingTask
+    },
+    onTaskDelete(taskId) {
+      this.toggleLoading()
+      taskApi
+        .deleteTask(taskId)
+        .then(() => {
+          this.tasks = this.tasks.filter((t) => t._id !== taskId)
+          this.$toast.success('The task have been deleted successfully!')
+        })
+        .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
+    },
+
+    handleError(error) {
+      this.$toast.error(error.message)
     }
-  },
-
-  onTaskSave(editedTask) {
-    return this.onTaskUpdate(editedTask)
-      .then(() => {
-        this.isTaskModalOpen = false
-        this.$toast.success('The task have been updated successfully!')
-      })
-      .catch(this.handleError)
-  },
-
-  onTaskEdit(editingTask) {
-    this.editingTask = editingTask
-  },
-  onTaskDelete(taskId) {
-    this.toggleLoading()
-    taskApi
-      .deleteTask(taskId)
-      .then(() => {
-        this.tasks = this.tasks.filter((t) => t._id !== taskId)
-        this.$toast.success('The task have been deleted successfully!')
-      })
-      .catch(this.handleError)
-      .finally(() => {
-        this.toggleLoading()
-      })
-  },
-  handleError(error) {
-    this.$toast.error(error.message)
   }
 }

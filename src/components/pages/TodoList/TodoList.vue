@@ -23,7 +23,6 @@
           @taskEdit="onTaskEdit(taskData)"
           @taskDelete="onTaskDelete(taskData._id)"
           @taskStatus="onTaskStatusChange(taskData)"
-          @statusChange="onStatusChange"
         />
       </v-col>
     </v-row>

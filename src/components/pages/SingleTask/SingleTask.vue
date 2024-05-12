@@ -17,12 +17,8 @@
     <v-card-text class="pa-2 pl-4"> <b>Due Date: </b> {{ dueDate }} </v-card-text>
 
     <v-card-actions>
-      <v-btn
-        :color="task.status === 'active' ? 'success' : 'info'"
-        variant="elevated"
-        @click="statusChange"
-      >
-        <v-icon v-if="task.status === 'active'" icon="mdi-check-outline" />
+      <v-btn :color="active ? 'success' : 'info'" variant="elevated" @click="statusChange">
+        <v-icon v-if="active" icon="mdi-check-outline" />
         <v-icon v-else icon="mdi-reload" />
       </v-btn>
 
@@ -34,7 +30,7 @@
       </v-btn>
     </v-card-actions>
   </v-card>
-  <h4 v-else><NotFound /></h4>
+  <h4 v-else>TTask not found!</h4>
 </template>
 
 <script src="./singleTask.js"></script>

@@ -22,16 +22,9 @@
     <v-card-text><RouterLink :to="`/task/${data._id}`">Show more...</RouterLink></v-card-text>
 
     <v-card-actions>
-      <v-btn
-        v-if="data.status === 'active'"
-        color="success"
-        variant="elevated"
-        @click="onStatusChange('done')"
-      >
-        <v-icon icon="mdi-check-outline" />
-      </v-btn>
-      <v-btn v-else color="info" variant="elevated" @click="onStatusChange('active')">
-        <v-icon icon="mdi-reload" />
+      <v-btn :color="active ? 'success' : 'info'" variant="elevated" @click="statusChange">
+        <v-icon v-if="active" icon="mdi-check-outline" />
+        <v-icon v-else icon="mdi-reload" />
       </v-btn>
 
       <v-btn color="warning" variant="elevated" @click="onEdit">

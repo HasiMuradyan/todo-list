@@ -1,4 +1,3 @@
-import { mapMutations } from 'vuex'
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -32,12 +31,10 @@ export default {
     this.$refs.title.focus()
   },
   methods: {
-    ...mapMutations(['toggleLoading']),
     onClose() {
       this.$emit('close')
     },
     onSave() {
-      this.toggleLoading()
       const task = {
         title: this.title.trim(),
         description: this.description
