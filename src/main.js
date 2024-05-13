@@ -21,7 +21,7 @@ app.use(vuetify)
 app.use(router)
 app.use(store)
 app.use(ToastPlugin, {
-  duration: 5000,
+  duration: 3000,
   position: 'bottom-left',
   dismissible: true
 })

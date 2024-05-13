@@ -17,25 +17,13 @@ export default {
 </script>
 
 <template>
-  <Loader v-if="isLoading" />
-  <HeaderComponent />
-  <main class="mainContainer">
-    <RouterView />
-  </main>
+  <div class="wrapper">
+    <Loader v-if="isLoading" />
+    <HeaderComponent />
+    <main class="mainContainer">
+      <RouterView />
+    </main>
 
-  <FooterComponent />
+    <FooterComponent />
+  </div>
 </template>
-
-<style>
-@font-face {
-  font-family: Montserrat;
-  src: url('./fonts/Montserrat-VariableFont_wght.ttf');
-}
-
-.app {
-  font-family: Montserrat;
-}
-.mainContainer {
-  min-height: 100vh;
-}
-</style>

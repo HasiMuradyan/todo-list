@@ -1,5 +1,6 @@
 import { mapMutations } from 'vuex'
 import TaskModal from '../../TaskModal/TaskModal.vue'
+import ConfirmDialog from '../../ConfirmDialog/ConfirmDialog.vue'
 import Task from '../../Task/Task.vue'
 import TaskApi from '../../../utils/taskApi.js'
 
@@ -8,13 +9,16 @@ const taskApi = new TaskApi()
 export default {
   components: {
     TaskModal,
-    Task
+    Task,
+    ConfirmDialog
   },
   data() {
     return {
       isTaskModalOpen: false,
       tasks: [],
-      editingTask: null
+      editingTask: null,
+      selectedTasks: new Set(),
+      isDeleteDialogOpen: false
     }
   },
   created() {
@@ -30,6 +34,14 @@ export default {
       if (!isOpen && this.editingTask) {
         this.editingTask = null
       }
+    }
+  },
+  computed: {
+    isDeleteSelectedBtnDisabled() {
+      return !this.selectedTasks.size
+    },
+    confirmDialogText() {
+      return `You are going to delete ${this.selectedTasks.size} task(s), are you sure?`
     }
   },
   methods: {
@@ -100,6 +112,36 @@ export default {
         .finally(() => {
           this.toggleLoading()
         })
+    },
+    toggleDeleteDialog() {
+      this.isDeleteDialogOpen = !this.isDeleteDialogOpen
+      if (!this.isDeleteDialogOpen) {
+        this.selectedTasks.clear()
+        this.$router.go(0)
+      }
+    },
+    onSelectedTasksDelete() {
+      this.toggleLoading()
+      taskApi
+        .deleteTasks([...this.selectedTasks])
+        .then(() => {
+          this.tasks = this.tasks.filter((t) => !this.selectedTasks.has(t._id))
+          this.getTasks()
+          this.selectedTasks.clear()
+          this.$toast.success('The selected tasks have been deleted successfully!')
+        })
+        .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+          this.toggleDeleteDialog()
+        })
+    },
+    toggleTaskId(taskId) {
+      if (this.selectedTasks.has(taskId)) {
+        this.selectedTasks.delete(taskId)
+      } else {
+        this.selectedTasks.add(taskId)
+      }
     },
     findAndReplaceTask(updatedTask) {
       const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
