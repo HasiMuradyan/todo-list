@@ -1,4 +1,5 @@
 import { mapMutations } from 'vuex'
+import './todoList.css'
 import TaskModal from '../../TaskModal/TaskModal.vue'
 import ConfirmDialog from '../../ConfirmDialog/ConfirmDialog.vue'
 import Task from '../../Task/Task.vue'
@@ -77,11 +78,11 @@ export default {
     },
 
     onTaskStatusChange(task) {
-      this.toggleLoading()
       const updatedTask = {
         ...task,
         status: task.status === 'active' ? 'done' : 'active'
       }
+      this.toggleLoading()
       taskApi
         .updateTask(updatedTask)
         .then((updatedTask) => {
@@ -126,7 +127,6 @@ export default {
         .deleteTasks([...this.selectedTasks])
         .then(() => {
           this.tasks = this.tasks.filter((t) => !this.selectedTasks.has(t._id))
-          this.getTasks()
           this.selectedTasks.clear()
           this.$toast.success('The selected tasks have been deleted successfully!')
         })

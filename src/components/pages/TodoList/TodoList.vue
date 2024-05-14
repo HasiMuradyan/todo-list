@@ -52,25 +52,3 @@
 </template>
 
 <script src="./todoList.js"></script>
-
-<style scoped>
-.delete-selected-btn {
-  position: fixed;
-  right: -144px;
-  bottom: 50px;
-  z-index: 200;
-}
-.delete-selected-btn:hover {
-  animation-name: btn-animation;
-  animation-duration: 0.8s;
-  right: 20px;
-}
-@keyframes btn-animation {
-  from {
-    right: -144px;
-  }
-  to {
-    right: 20px;
-  }
-}
-</style>

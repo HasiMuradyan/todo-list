@@ -11,7 +11,6 @@ export default {
     email: '',
     message: '',
     nameRules: [(v) => !!v || 'Name is required'],
-    messageRules: [(v) => !!v || 'Message is required'],
     emailRules: [(v) => !!v || 'Email is required', (v) => emailRegex.test(v) || 'Invalid email']
   }),
 
@@ -25,13 +24,13 @@ export default {
       const form = {
         name: this.name,
         email: this.email,
-        message: this.message
+        message: this.message ? this.message : ''
       }
       this.toggleLoading()
       formApi
         .sendForm(form)
-        .then((form) => {
-          this.reset(form)
+        .then(() => {
+          this.reset()
           this.$toast.success('Thank you for contacting us, the form has been sent!')
         })
 

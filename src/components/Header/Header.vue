@@ -22,39 +22,6 @@
   </v-container>
 </template>
 
-<style scoped>
-header {
-  .v-toolbar__title {
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  .btnsForHeader {
-    color: black;
-    font-size: larger;
-  }
-
-  .v-toolbar__content {
-    @media only screen and (max-width: 599px) {
-      padding: 0;
-    }
-  }
-}
-.v-container {
-  flex: 0 0 auto;
-}
-.mainHeader {
-  .v-toolbar__items {
-    .v-btn__content {
-      a {
-        color: black;
-      }
-    }
-
-    .v-btn {
-      @media only screen and (max-width: 599px) {
-        padding: 0 0 0 10px;
-      }
-    }
-  }
-}
-</style>
+<script>
+import './header.css'
+</script>
