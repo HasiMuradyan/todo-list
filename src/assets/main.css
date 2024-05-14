@@ -1,1 +1,26 @@
 @import './base.css';
+
+body {
+  max-width: 1920px;
+  margin: auto;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url('./fonts/Montserrat-VariableFont_wght.ttf');
+}
+
+.app {
+  font-family: Montserrat;
+}
+.mainContainer {
+  flex: 1 0 auto;
+}
+.wrapper {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

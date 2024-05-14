@@ -1,40 +1,26 @@
-class TaskApi {
-  apiHost = import.meta.env.VITE_API_HOST
+import Api from './api'
 
-  request(method, url = '', body) {
-    const params = {
-      method,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    if (body) {
-      params.body = JSON.stringify(body)
-    }
-    const host = `${this.apiHost}/task/${url}`
-    return fetch(host, params).then(async (res) => {
-      if (res.status >= 500) {
-        throw new Error('Something went wrong, please, try again later!')
-      }
+class TaskApi extends Api {
+  entityName = 'task'
 
-      const result = await res.json()
-      if (res.status >= 300 && result.error) {
-        throw new Error(result.error.message)
-      }
-      return result
-    })
-  }
   addNewTask(task) {
     return this.request('POST', '', task)
   }
   getTasks() {
     return this.request('GET')
   }
-  getSingleTask() {}
+  getSingleTask(taskId) {
+    return this.request('GET', taskId)
+  }
   deleteTask(taskId) {
     return this.request('DELETE', taskId)
   }
-
+  deleteTasks(taskIds) {
+    const body = {
+      tasks: taskIds
+    }
+    return this.request('PATCH', '', body)
+  }
   updateTask(task) {
     return this.request('PUT', task._id, task)
   }
