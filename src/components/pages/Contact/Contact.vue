@@ -20,12 +20,7 @@
               required
               type="email"
             ></v-text-field>
-            <v-textarea
-              label="Message"
-              v-model.trim="message"
-              required
-              :rules="messageRules"
-            ></v-textarea>
+            <v-textarea label="Message" v-model.trim="message"></v-textarea>
 
             <div class="d-flex flex-column">
               <v-btn
@@ -36,7 +31,7 @@
                 color="success"
                 @click="sendForm"
               >
-                n Send
+                Send
               </v-btn>
 
               <v-btn

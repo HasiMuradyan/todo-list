@@ -1,0 +1,12 @@
+.about-us-container p {
+  font-size: 25px;
+  /* margin-left: 50px; */
+}
+
+.about-us-container h3 {
+  text-align: center;
+}
+.about-us-container ul {
+  /* margin-left: 40px; */
+  font-size: 25px;
+}
